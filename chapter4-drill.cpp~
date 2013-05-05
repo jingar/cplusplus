@@ -1,0 +1,40 @@
+#include <iostream>
+#include <string>
+#include <cmath>
+
+
+void print_almost_equal(double val_1,double val_2)
+{
+  const double almost_equal = 1.0/10000000;
+
+  if(fabs(val_1 - val_2) < almost_equal)
+    {
+      std::cout << "the numbers are almost equal" << std::endl;
+    }
+}
+int main()
+{
+  double value_1 = 0.0;
+  double value_2 = 0.0;
+  while(std::cin >> value_1 >> value_2)
+    {
+      if(value_1 > value_2)
+	{
+	  
+	  std::cout << "the smaller value is: " << value_2 <<std::endl 
+		    << "the larger value is: " << value_1 << std::endl;
+	  print_almost_equal(value_1,value_2);
+	}
+      else if(value_1 < value_2)
+	{
+	  std::cout << "the smaller value is: " << value_1 <<std::endl
+		    << "the larger value is: " << value_2 << std::endl;
+	    print_almost_equal(value_1,value_2);
+	}
+      else if(value_1 == value_2)
+	{
+	  std::cout << "the numbers are equal: " << value_1 << " " << value_2 << std::endl;
+	}
+    }
+  return 0;
+}
