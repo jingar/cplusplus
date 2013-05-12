@@ -1,13 +1,13 @@
 #include <iostream>
 #include <cmath>
+#include <stdexcept>
 
 void quadratic_solver(double a, double b, double c)
 {
   double temp = (b*b) - (4 * a * c);
   if(temp < 0)
     {
-      std::cout << "This equation has no real roots ";
-      return;
+      throw std::runtime_error("no real roots");
     }
   else if ( temp == 0)
     {
@@ -27,17 +27,23 @@ void quadratic_solver(double a, double b, double c)
 
 int main()
 {
-  double a = 0.0,b = 0.0 , c = 0.0;
+  try{
+    double a = 0.0,b = 0.0 , c = 0.0;
+  
+    std::cout << "This is a quadartic formula solver" << std::endl;
+    std::cout << "Enter the first value" << std::endl;
+    std::cin >> a;
+    std::cout << "Enter the second value" << std::endl;
+    std::cin >> b;
+    std::cout << "Enter the third value" << std::endl;
+    std::cin >> c;
 
-  std::cout << "This is a quadartic formula solver" << std::endl;
-  std::cout << "Enter the first value" << std::endl;
-  std::cin >> a;
-  std::cout << "Enter the second value" << std::endl;
-  std::cin >> b;
-  std::cout << "Enter the third value" << std::endl;
-  std::cin >> c;
 
-
-  quadratic_solver(a,b,c);
-  return 0;
+    quadratic_solver(a,b,c);
+ 
+  }
+  catch(std::runtime_error& e)
+    {
+      std::cerr << "runtime error: " << e.what() << std::endl;
+    }
 }
