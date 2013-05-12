@@ -1,0 +1,10 @@
+#include <iostream>
+
+void error(string s1)
+{
+  throw runtime_error(s1);
+}
+int main()
+{
+
+}

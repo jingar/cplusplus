@@ -1,0 +1,11 @@
+#include <iostream>
+
+int main()
+{
+  double input = 0.0;
+
+  std::cin >> input;
+
+  std::cout << "negatised (boyaa) " << -input << std::endl;
+  return 0;
+}

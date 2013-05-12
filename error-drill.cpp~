@@ -1,0 +1,7 @@
+#include <iostream>
+#include <string>
+int main()
+{
+  std::string s = "ape"; bool c = "fool" <s;
+
+  std::cout << c << std::endl;
