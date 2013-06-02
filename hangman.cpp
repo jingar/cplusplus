@@ -67,6 +67,7 @@ void Word_container::match(char c)
 
 void Word_container::print_found_letters()
 {
+  std::cout << "word: ";
   for(unsigned int i = 0; i < found.size();++i)
     {
       if(found[i] == true)
