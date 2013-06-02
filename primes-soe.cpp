@@ -2,21 +2,6 @@
 #include <vector>
 #include <cmath>
 
-void n_primes(std::vector<bool>& numbers,int n)
-{
-  for(int i = 2; i < n;i++)
-    {
-      for(int j = i; j < n; j+=i)
-	{
-	  if(j > i  && numbers[j] == false)
-	    {
-	      std::cout << "i " << i<< "\n";
-	      numbers[j] = true;
-	    }
-	}
-    }
-  
-}
 void prime_soe(std::vector<bool>& numbers)
 {
   //find all the multiples of every number 2 and size of vector
@@ -36,20 +21,26 @@ void prime_soe(std::vector<bool>& numbers)
 
 
 
-void print_n_primes(const std::vector<bool>& numbers,int n)
+void print_primes(const std::vector<bool>& numbers,int max)
 {
-  for(int i = 2; i < n;i++)
+  int counter = 0;
+  for(unsigned int i = 2; i < numbers.size(); ++i)
     {
       if(numbers[i] == false)
 	{
 	  std::cout << i <<  "\n";
+	  ++counter;
+	}
+      if(counter == max)
+	{
+	  break;
 	}
     }
 }
 
 void print_primes(const std::vector<bool>& numbers)
 {
-  for(unsigned int i = 2; i < numbers.size();i++)
+  for(unsigned int i = 2; i < numbers.size(); ++i)
     {
       if(numbers[i] == false)
 	{
@@ -59,19 +50,28 @@ void print_primes(const std::vector<bool>& numbers)
 }
 int main()
 {
-  int max = 0;
+  int user_input = 0,max = 0;
   std::cout << "This program calculates primes up to Max, enter the value for max" << std::endl;
   std::cin >> max;
-  if(max > 5)
+  user_input = max;
+  if(max <= 0)
+    {
+      std::cout << "Dont give me stupid input \n";
+      return -1;
+    }
+  else if(max > 5)
     {
       max = (max * log(max)) + (max * log(log(max)));
-      std::cout << "n " << max << std::endl;    
+      std::cout << "max >5:  " << max << std::endl;    
     }
+  else
+    {
+      std::cout << "less than 5\n";
+      max = 11;
+    }
+
   std::vector<bool> numbers(max+1,false);
-  
- 
-  //  prime_soe(numbers);
-  n_primes(numbers,max);
-  print_n_primes(numbers,max);
+  prime_soe(numbers);
+  print_primes(numbers,user_input);
   //print_primes(numbers);
 }

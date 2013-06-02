@@ -1,0 +1,60 @@
+#include <fstream>
+#include <iostream>
+#include <cstdlib>
+#include <vector>
+#include <string>
+const int number_of_words = 235882;
+class Word_container
+{
+public:
+  std::string word;
+  std::vector<bool> found;
+  Word_container(std::string s)
+    :word(s){};
+  void compare(std::string s);
+};
+
+
+void Word_container::compare(std::string s)
+{
+  for(unsigned int i = 0; i < s.size();++i)
+    {
+      if(word[i] == s[i])
+	{
+	  found[i] == true;
+	}
+    }
+}
+
+std::string find_random_word()
+{
+  std::ifstream word_file("words.txt");
+  std::string current_word;
+  int counter = 0;
+  srand( time(0) );
+  int random_number = rand()%number_of_words;
+  
+  if(!word_file.is_open())
+    {
+      std::cerr << "Couldn't open the file words.txt \n";
+    }
+
+  while(word_file >> current_word)
+    {
+      if(random_number == counter)
+	{
+	  break;
+	}
+      ++counter;
+    }
+  return current_word;
+}
+
+int main()
+{
+  std::string in_word;
+  std::cin >> in_word;
+  
+  Word_container w(find_random_word());
+  std::cout << w.word << '\n';
+}

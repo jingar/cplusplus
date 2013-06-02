@@ -61,7 +61,7 @@ void find_all_scores(const std::vector<std::string>& names, const std::vector<in
 {
   bool found = false;
   for(unsigned int i = 0; i <scores.size();i++)
-    {
+p    {
       if(scores[i] == score)
 	{
 	  std::cout << names[i] << "\n";

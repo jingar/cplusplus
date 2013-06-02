@@ -11,8 +11,6 @@ class Token
             :kind(ch),value(0){}
         Token(char ch,double val)
             :kind(ch),value(val){}
-        Token Token_stream();
-
 };
 
 class Token_stream
