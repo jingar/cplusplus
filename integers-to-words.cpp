@@ -75,17 +75,25 @@ void initalize_words()
   large_units.push_back(" trillion ");
   large_units.push_back(" quadrillion ");
   large_units.push_back(" quintillion ");
+  large_units.push_back(" sextillion ");
+  large_units.push_back(" septillion ");
+  large_units.push_back(" octillion ");
+  large_units.push_back(" nonillion ");
+  large_units.push_back(" decillion ");
+  large_units.push_back(" undecillion ");
+  large_units.push_back(" duodecillion ");
 }
 
 void take_input()
 {
-  long i;
-  std::cin >> i;
-  while(i != 0)
+  std::string s;
+  std::cin >> s;
+  for(unsigned int i = 0; i < s.size(); ++i)
     {
-      numbers.push_back(i %10);
-      i = i/10;
+      
+      numbers.push_back(s[i]-'0');
     }
+  std::reverse(numbers.begin(),numbers.end());
 }
 std::string handle_units()
 {
