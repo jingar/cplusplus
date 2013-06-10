@@ -13,9 +13,9 @@ public:
   std::vector<bool> found;
   std::vector<char> wrong_guess;
   unsigned int matched;
-  unsigned int lives = 9;
+  unsigned int lives;
   Word_container(std::string s)
-    :word(s),matched(0)
+    :word(s),found(),wrong_guess(),matched(0),lives(0)
   {
     found.resize(s.size(),false);
   };
@@ -98,7 +98,7 @@ std::string find_random_word()
   std::ifstream word_file(dictionary);
   std::string current_word;
   int counter = 0;
-  srand( time(0) );
+  srand((unsigned int)time(NULL));
   int random_number = rand()%number_of_words;
   
   if(!word_file.is_open())
@@ -129,103 +129,105 @@ bool Word_container::is_dead()
 
 void print_hangman(Word_container w)
 {
-  int stage = w.wrong_guess.size();
+  long unsigned int stage = w.wrong_guess.size();
   
   switch(stage)
     {
-
-    case 1: std::cout << "\|\n"
-		      << "\|\n"      
-		      << "\|\n"
-		      << "\|\n"      
-		      << "\|\n"      
-		      << "\|\n"      
-		      << "\|\n"     
-		      << "\|\n"
+    case 1: std::cout << "|\n"
+		      << "|\n"      
+		      << "|\n"
+		      << "|\n"      
+		      << "|\n"      
+		      << "|\n"      
+		      << "|\n"     
+		      << "|\n"
 		      << "-----------------\n";
 	break;
 
-    case 2: std::cout << "\|---------------\n"
-		      << "\|\n"      
-		      << "\|\n"
-		      << "\|\n"      
-		      << "\|\n"      
-		      << "\|\n"      
-		      << "\|\n"     
-		      << "\|\n"
+    case 2: std::cout << "|---------------\n"
+		      << "|\n"      
+		      << "|\n"
+		      << "|\n"      
+		      << "|\n"      
+		      << "|\n"      
+		      << "|\n"     
+		      << "|\n"
 		      << "---------------- \n";
       break;
-    case 3: std::cout << "\|---------------\n"
-		      << "\|             \|\n"      
-		      << "\|             \|\n"      
-		      << "\|             \|\n"      
-		      << "\|\n"      
-		      << "\|\n"      
-		      << "\|\n"     
-		      << "\|\n"
+    case 3: std::cout << "|---------------\n"
+		      << "|             |\n"      
+		      << "|             |\n"      
+		      << "|             |\n"      
+		      << "|\n"      
+		      << "|\n"      
+		      << "|\n"     
+		      << "|\n"
 		      << "-----------------\n";
       break;
-    case 4: std::cout << "\|---------------\n"
-		      << "\|             \|\n"      
-		      << "\|             \|\n"      
-		      << "\|             \|\n"      
-		      << "\|             0\n"      
-		      << "\|\n"      
-		      << "\|\n"     
-		      << "\|\n"
+    case 4: std::cout << "|---------------\n"
+		      << "|             |\n"      
+		      << "|             |\n"      
+		      << "|             |\n"      
+		      << "|             0\n"      
+		      << "|\n"      
+		      << "|\n"     
+		      << "|\n"
 		      << "-----------------\n";
       break;
-    case 5: std::cout << "\|---------------\n"
-		      << "\|             \|\n"      
-		      << "\|             \|\n"      
-		      << "\|             \|\n"      
-		      << "\|             0\n"      
-		      << "\|             \|\n"      
-		      << "\|             \|\n"
-		      << "\|\n"
+    case 5: std::cout << "|---------------\n"
+		      << "|             |\n"      
+		      << "|             |\n"      
+		      << "|             |\n"      
+		      << "|             0\n"      
+		      << "|             |\n"      
+		      << "|             |\n"
+		      << "|\n"
 		      << "-----------------\n";
       break;
-    case 6: std::cout << "\|---------------\n"
-		      << "\|             \|\n"      
-		      << "\|             \|\n"      
-		      << "\|             \|\n"      
-		      << "\|             0\n"      
-		      << "\|            \\\|\n"      
-		      << "\|             \|\n"
-		      << "\|\n"
+    case 6: std::cout << "|---------------\n"
+		      << "|             |\n"      
+		      << "|             |\n"      
+		      << "|             |\n"      
+		      << "|             0\n"      
+		      << "|            \\|\n"      
+		      << "|             |\n"
+		      << "|\n"
 		      << "-----------------\n";
       break;
-    case 7: std::cout << "\|---------------\n"
-		      << "\|             \|\n"      
-		      << "\|             \|\n"      
-		      << "\|             \|\n"      
-		      << "\|             0\n"      
-		      << "\|            \\\|/\n"      
-		      << "\|             \|\n"
-		      << "\|\n"
+    case 7: std::cout << "|---------------\n"
+		      << "|             |\n"      
+		      << "|             |\n"      
+		      << "|             |\n"      
+		      << "|             0\n"      
+		      << "|            \\|/\n"      
+		      << "|             |\n"
+		      << "|\n"
 		      << "-----------------\n";
       break;
-    case 8: std::cout << "\|---------------\n"
-		      << "\|             \|\n"      
-		      << "\|             \|\n"      
-		      << "\|             \|\n"      
-		      << "\|             0\n"      
-		      << "\|            \\\|/\n"      
-		      << "\|             \|\n"
-		      << "\|            /\n"
-		      << "\|\n"
+    case 8: std::cout << "|---------------\n"
+		      << "|             |\n"      
+		      << "|             |\n"      
+		      << "|             |\n"      
+		      << "|             0\n"      
+		      << "|            \\|/\n"      
+		      << "|             |\n"
+		      << "|            /\n"
+		      << "|\n"
 		      << "-----------------\n";
       break;
-    case 9: std::cout << "\|---------------\n"
-		      << "\|             \|\n"      
-		      << "\|             \|\n"      
-		      << "\|             \|\n"      
-		      << "\|             0\n"      
-		      << "\|            \\\|/\n"      
-		      << "\|             \|\n"
-		      << "\|            /\ \\\n"
-		      << "\|\n"
+    case 9: std::cout << "|---------------\n"
+		      << "|             |\n"      
+		      << "|             |\n"      
+		      << "|             |\n"      
+		      << "|             0\n"      
+		      << "|            \\|/\n"      
+		      << "|             |\n"
+		      << "|            /\\\\n"
+		      << "|\n"
 		      << "-----------------\n";
+      break;
+    default:
+      std::cout << "ERROR \n";
       break;
     }
 }
@@ -264,6 +266,6 @@ int main()
     }
   else
     {
-      std::cout << "you win!! \n";      
+      std::cout << "you win!!\n";      
     }
 }

@@ -29,7 +29,7 @@ void initialize_numbers(std::vector<int>& numbers)
 
 void split_input(std::vector<int>& input,int number,int number_size)
 {
-    if(number > 9999 || < )
+    if(number > 9999)
     for(int i = 0; i < number_size; ++i)
     {
         input[i] = number%10;
