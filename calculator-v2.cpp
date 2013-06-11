@@ -1,6 +1,7 @@
 #include <iostream>
 #include <cstdlib>
 #include <string>
+#include <limits>
 #include <stdexcept>
 class Token
 {
@@ -23,11 +24,8 @@ class Token_stream
     private:
         bool full;
         Token buffer;
-
-
 };
 
-void error(const std::string& s);
 
 Token_stream::Token_stream()
     :full(false),buffer(0)
@@ -37,15 +35,10 @@ void Token_stream::put_back(Token t)
 {
     if(full)
     {
-        error("Buffer is full");
+          throw std::runtime_error("Buffer is full");
     }
     buffer = t;
     full = true;
-}
-
-void error(const std::string& s)
-{
-	throw std::runtime_error(s);
 }
 
 void keep_window_open()
@@ -56,7 +49,7 @@ void keep_window_open()
 	std::cin >> ch;
 	return;
 }
-int factorial(int f)
+int factorial(unsigned int f)
 {
     std::cout << "f: " << f << "\n";
     int answer = 1;
@@ -65,7 +58,7 @@ int factorial(int f)
         return answer;
     }
 
-    for(int i = 1; i <= f; ++i)
+    for(unsigned int i = 1; i <= f; ++i)
         {
             answer*=i;
             std::cout << "i: " << i << "\n";
@@ -84,7 +77,7 @@ Token Token_stream::get()    // read a token from cin
     std::cin >> ch;    // note that >> skips whitespace (space, newline, tab, etc.)
 
     switch (ch) {
-    case '=':    // for "print"
+    case ';':    // for "print"
     case 'q':    // for "quit"
     case '(': case ')': case '{': case '}': case '+': case '-': case '*': case '/': case '!':
         return Token(ch);        // let each character represent itself
@@ -98,9 +91,10 @@ Token Token_stream::get()    // read a token from cin
             return Token('8',val);   // let '8' represent "a number"
         }
     default:
-        error("Bad token");
+	throw std::runtime_error("Bad Token");
     }
 }
+
 
 
 Token_stream ts;
@@ -118,7 +112,7 @@ double primary()
                t = ts.get();
                if(t.kind != ')')
                {
-                   error(" ) expected");
+		   throw std::runtime_error(" ) expected");
                }
                return d;
             }
@@ -129,7 +123,7 @@ double primary()
                t = ts.get();
                if(t.kind != '}')
                {
-                   error(" } expected");
+                     throw std::runtime_error(" } expected");
                }
                return d;
             }
@@ -140,8 +134,7 @@ double primary()
 
         default:
             {
-                error("primary expected");
-                return -1;
+	      throw std::runtime_error("primary expected");
             }
     }
 }
@@ -157,14 +150,14 @@ double lower_term()
     {
         switch(t.kind)
         {
-            case '!':
-                left = factorial(left);
-                std::cout << "left in switch: " << left << "\n";
-                t = ts.get();
-                break;
-            default:
-                ts.put_back(t);
-                return left;
+	case '!':
+	  left = factorial(left);
+	  std::cout << "left in switch: " << left << "\n";
+	  t = ts.get();
+	  break;
+	default:
+	  ts.put_back(t);
+	  return left;
         }
     }
 }
@@ -187,9 +180,9 @@ double term()
             case '/':
                 {
                     double d = lower_term();
-                    if(d == 0)
+                    if(d == 0.0)
                     {
-                        error("Cant divide by zero");
+                          throw std::runtime_error("Cant divide by zero");
                     }
                     left/=d;
                     t=ts.get();
@@ -243,13 +236,14 @@ int main()
         double val = 0;
         while(std::cin)
         {
+	  std::cout << ">";
             Token t = ts.get();
             if(t.kind == 'q')
             {
                 keep_window_open();
                 break;
             }
-            else if(t.kind == '=')
+            else if(t.kind == ';')
             {
                 std::cout << "=" << val << '\n';
             }
@@ -258,9 +252,7 @@ int main()
                 ts.put_back(t);
                 val = expression();
             }
-
         }
-
     }
     catch(std::exception& e)
     {

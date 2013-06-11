@@ -3,7 +3,7 @@ CFLAGS=-Wall -Wextra -pedantic -std=c++0x -Wall -Weffc++ -pedantic  \
     -pedantic-errors -Wextra  -Wall -Wcast-align \
     -Wcast-qual  -Wchar-subscripts  -Wcomment -Wconversion \
     -Wdisabled-optimization \
-    -Werror -Wfloat-equal  -Wformat  -Wformat=2 \
+    -Wfloat-equal  -Wformat  -Wformat=2 \
     -Wformat-nonliteral -Wformat-security  \
     -Wformat-y2k \
     -Wimport  -Winit-self  -Winline \
