@@ -1,0 +1,12 @@
+#include <iostream>
+
+
+int swap_v(int,int)
+{
+
+}
+
+int main()
+{
+  return 0;
+}

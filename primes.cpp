@@ -7,13 +7,13 @@ void find_primes(std::vector<int>& p,int max)
   for(int i = 3 ; i <= max;i++)
     {
       for(unsigned int j = 0; j <p.size(); j++)
-	{	 
+        {	 
 
-	  if((i%p[j]) ==0)
-	    {
-	      p.push_back(i);
-	    }
-	}
+          if((i%p[j]) == 0)
+            {
+              p.push_back(i);
+            }
+        }
     }
 }
 

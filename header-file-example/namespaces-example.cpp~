@@ -1,0 +1,10 @@
+#include <iostream>
+
+namespace X
+{
+  extern int var;
+  void print()
+  {
+    std::cout << var << '\n';
+  }
+}

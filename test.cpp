@@ -1,10 +1,11 @@
 #include <iostream>
+#include <cctype>
+
 int main()
 {
-  int sum = 0, value;
-  // read till end-of-file, calculating a running total of all values read
-  while (std::cin >> value)
-    sum += value; // equivalent to sum = sum + value
-  std::cout << "Sum is: " << sum << std::endl;
+  for(int i = 0; i < 10; ++i)
+    {
+      std::cout << i << '\n';
+    }
   return 0;
 }

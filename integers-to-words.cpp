@@ -12,6 +12,7 @@ long unsigned position = 0;
 long unit = 0;
 long large_unit_position = 0;
 std::string large_unit = "";
+
 bool is_next()
 {
    if(position < numbers.size())
