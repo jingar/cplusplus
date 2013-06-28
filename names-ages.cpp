@@ -55,7 +55,6 @@ void print_name_age_pairs(std::vector<std::string>& names, const std::vector<int
           std::cout << "name: " << names[i] << " age: " << ages[indice] << '\n';
         }
     }
-
 }
 
 int main()
