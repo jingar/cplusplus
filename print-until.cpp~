@@ -1,0 +1,20 @@
+#include <iostream>
+#include <vector>
+#include <string>
+
+void print_until_s(const vector<std::string>& v, const std::string& quit)
+{
+  for(unsigned int i= 0; i<v.size(); ++i) 
+    {
+      if(v[i] == quit)
+        {
+          return;
+        }
+      std::cout << v[i] << '\n';
+    }
+}
+
+int main()
+{
+  return 0;
+}
