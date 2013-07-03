@@ -29,6 +29,7 @@ void take_ages(std::vector<int>& v)
     {
       v.push_back(age);
     }
+  take_ages(v);
   std::cout << "finished \n";
 }
 int find_string(std::string s,const std::vector<std::string>& v)

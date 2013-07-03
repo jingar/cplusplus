@@ -1,20 +1,37 @@
 #include <iostream>
 #include <stdexcept>
-class Date
+namespace Months
 {
-public:
   enum Month
     {
       jan = 1, feb,mar,apr,may,jun,jul,aug,sep,oct,nov,dec
     };
-  Date(int y,Month m,int d);
+  Month& operator++(Month& m)
+  {
+    m = (m==dec)?jan:Month(m+1);
+    return m;
+  }
+
+  bool operator<  (Enum ee) const;
+  bool operator<= (Enum ee) const;
+  bool operator>  (Enum ee) const;
+  bool operator>= (Enum ee) const;
+  bool operator== (const Enum ee) const;
+  bool operator!= (const Enum ee) const;
+
+}
+
+class Date
+{
+public:
+  Date(int y,Months::Month m,int d);
   void add_day(int n);
   int year() { return y; }
-  Month month() { return m; }
+  Months::Month month() { return m; }
   int day() { return d; }
 private:
   int y;
-  Month m;
+  Months::Month m;
   int d;
 };
 
@@ -31,45 +48,46 @@ Date::Date(int yy,Month mm, int dd)
     }
   if(y < 0)
     {
+
       throw std::runtime_error("year must be greater than 0");
     }
 }
 
 
-void Date::add_day(int n)
-{
-  switch(m)
-    {
-    case jan:
-    case mar:
-    case may:
-    case jul:
-    case aug:
-    case oct:
-    case dec:
-      break;
-    case apr:
-    case jun:
-    case sep:
-    case nov:
-      break;
-    case feb:
-      break;
-    default:
-      throw std::runtime_error("unrecognized month");
-    }
+// void Date::add_day(int n)
+// {
+//   switch(m)
+//     {
+//     case jan:
+//     case mar:
+//     case may:
+//     case jul:
+//     case aug:
+//     case oct:
+//     case dec:
+//       break;
+//     case apr:
+//     case jun:
+//     case sep:
+//     case nov:
+//       break;
+//     case feb:
+//       break;
+//     default:
+//       throw std::runtime_error("unrecognized month");
+//     }
 
-}
+// }
 int main()
 {
 
-  Date today(1978,Date::Month(1),31);
-  std::cout << "Year: " << today.year() << " Month: " << today.month() 
-            << " Day: " << today.day() << '\n';
+  // Date today(1978,Date::Month(1),31);
+  // std::cout << "Year: " << today.year() << " Month: " << today.month() 
+  //           << " Day: " << today.day() << '\n';
 
-  today.add_day(20);
+  // today.add_day(20);
 
-  std::cout << "Year: " << today.year() << " Month: " << today.month() 
-            << " Day: " << today.day() << '\n';
+  // std::cout << "Year: " << today.year() << " Month: " << today.month() 
+  //           << " Day: " << today.day() << '\n';
   return 0;
 }

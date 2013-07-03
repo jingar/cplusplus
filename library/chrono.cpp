@@ -1,23 +1,23 @@
 #include "chrono.h"
-
+#include <stdexcept>
 namespace chrono 
 {
-  Date::Date(int yy,Month mm, int dd)
-    :y(yy),m(mm),d(dd)
+  Date::Date(int dd,Month mm, int yy)
+    :d(dd),m(mm),y(yy)
   {
-    if(!is_date(yy,mm,dd))
+    if(!is_date(dd,mm,yy))
       {
         throw Invalid();
       }
   }
   Date& default_date()
   {
-    static Date dd(2001,Date::jan,1);
+    static Date dd(1,Date::jan,2001);
     return dd;
   }
   
   Date::Date()
-    :y(default_date().year()),m(default_date().month()),d(default_date().day())
+    :d(default_date().day()),m(default_date().month()),y(default_date().year())
   {
   }
 
@@ -39,15 +39,17 @@ namespace chrono
     y+=n;
   }
 
-  boo is_date(int y, Date::Month m, int d)
+  bool is_date(int d, Date::Month m, int y)
   {
+    std::cout << "Days: " << d << '\n';
     // assume that y is valid
     
     if(d<=0) // day must be positive
       {
+        std::cout << "day less than 0 \n";
         return false;
       }
-    int days_in_month = 31; // most months have 31 days
+    int days_in_month = 0;
     switch(m)
       {
       case Date::feb:
@@ -56,23 +58,36 @@ namespace chrono
       case Date::apr: case Date::jun: case Date::sep: case Date::nov:
         days_in_month = 30; // if any of theese months, make it equal to 30 days
         break;
+      case Date::jan: case Date::mar: case Date::may: case Date::jul: case Date::aug: 
+      case Date::oct: case Date::dec:
+        days_in_month = 31;
+        break;
+      default:
+        throw std::runtime_error("unknown month");
       }
     if(d > days_in_month)
       {
+        std::cout << "day is greater than days in the month \n";
         return false;
       }
     return true;
   }
 
-  // bool leapyear(int y)
-  // {
-  //   return true; // for now
-  // }
+  bool leapyear(int y)
+  {
+    // if a year is evenly divisble by a 100 it must also be evely divisble by
+    // 400 to be a leap year other wise it must be evenly divisble by 4
+    if((y  % 100 == 0 && y % 400 == 0 )|| y % 4 == 0)
+      {
+        return true; // for now
+      }
+    return false;
+  }
 
   bool operator==(const Date& a, const Date& b)
   {
     // check if the year months and days match
-    return a.year == b.year() && a.month() == b.month() && a.day() == b.day();
+    return a.day() == b.day() && a.month() == b.month() && a.year() == b.year();
   }
 
   bool operator!=(const Date& a, const Date& b)
@@ -80,23 +95,23 @@ namespace chrono
     return !(a==b);
   }
 
-  ostream& operator<<(ostream& os,const Date& d)
+  std::ostream& operator<<(std::ostream& os,const Date& d)
   {
-    return os << '(' << d.year() << ',' << d.month() << ',' << d.day() << ')';
+    return os << '(' << d.day() << ',' << d.month() << ',' << d.year() << ')';
   }
 
-  istream& operator>>(istream& is, Date& dd)
+  std::istream& operator>>(std::istream& is, Date& dd)
   {
     int y,m,d;
     char ch1, ch2, ch3, ch4;
-    is >> ch1 >> y >> ch2 >> m >> ch3 >> d >> ch4;
+    is >> ch1 >> d >> ch2 >> m >> ch3 >> y >> ch4;
     if(!is)
       {
-        retunr is;
+        return is;
       }
-    if(ch1! = '(' || ch2 != ',' || ch3 != ',' || ch4 != ')')
+    if(ch1 != '(' || ch2 != ',' || ch3 != ',' || ch4 != ')')
       {
-        is.clear(ios_base::failbit);
+        is.clear(std::ios_base::failbit);
         return is;
       }
     return is;
