@@ -1,4 +1,6 @@
 #include "chrono.h"
+#include <stdexcept>
+#include <vector>
 
 namespace chrono 
 {
@@ -19,7 +21,6 @@ namespace chrono
   Date::Date()
     :y(default_date().year()),m(default_date().month()),d(default_date().day())
   {
-
   }
 
   // void Date::add_day(int n)
@@ -40,12 +41,13 @@ namespace chrono
     y+=n;
   }
 
-  boo is_date(int y, Date::Month m, int d)
+  bool is_date(int y, Date::Month m, int d)
   {
     // assume that y is valid
     
     if(d<=0) // day must be positive
       {
+        std::cout << "day is less than or equal to 0 \n";
         return false;
       }
     int days_in_month = 31; // most months have 31 days
@@ -60,20 +62,27 @@ namespace chrono
       }
     if(d > days_in_month)
       {
+        std::cout << "day is the month are more then possible \n";
         return false;
       }
     return true;
   }
 
-  // bool leapyear(int y)
-  // {
-  //   return true; // for now
-  // }
+  bool leapyear(int y)
+  {
+    // if a year is evenly divisble by a 100 it must also be evely divisble by
+    // 400 to be a leap year other wise it must be evenly divisble by 4
+    if((y  % 100 == 0 && y % 400 == 0 )|| y % 4 == 0)
+      {
+        return true; // for now
+      }
+    return false;
+  }
 
   bool operator==(const Date& a, const Date& b)
   {
     // check if the year months and days match
-    return a.year == b.year() && a.month() == b.month() && a.day() == b.day();
+    return a.year() == b.year() && a.month() == b.month() && a.day() == b.day();
   }
 
   bool operator!=(const Date& a, const Date& b)
@@ -81,44 +90,26 @@ namespace chrono
     return !(a==b);
   }
 
-  ostream& operator<<(ostream& os,const Date& d)
+  std::ostream& operator<<(std::ostream& os,const Date& d)
   {
     return os << '(' << d.year() << ',' << d.month() << ',' << d.day() << ')';
   }
 
-  istream& operator>>(istream& is, Date& dd)
+  std::istream& operator>>(std::istream& is, Date& dd)
   {
     int y,m,d;
     char ch1, ch2, ch3, ch4;
     is >> ch1 >> y >> ch2 >> m >> ch3 >> d >> ch4;
     if(!is)
       {
-        retunr is;
+        return is;
       }
-    if(ch1! = '(' || ch2 != ',' || ch3 != ',' || ch4 != ')')
+    if(ch1 != '(' || ch2 != ',' || ch3 != ',' || ch4 != ')')
       {
-        is.clear(ios_base::failbit);
+        is.clear(std::ios_base::failbit);
         return is;
       }
     return is;
   }
 
-  enum Day
-    {
-      sunday,monday,tuesday,wednesday,thursday,friday,saturday
-    };
-
-  // Day day_of_week(const Date& d)
-  // {
-
-  // }
-  // Day next_sunday(const Date& d)
-  // {
-
-  // }
-
-  // Day next_weekday(const Date& d)
-  // {
-
-  // }
 }
