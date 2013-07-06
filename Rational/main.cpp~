@@ -1,0 +1,13 @@
+//#include <boost/lexical_cast.hpp>
+#include "Math.h"
+#include <iostream>
+int main(int argc,char* argv[])
+{
+  Math::Rational l(3,7);
+  Math::Rational r(4,11);
+  
+  Math::Rational test = l + r;
+  
+  std::cout << test.numerator << " : " << test.denominator << '\n';
+  
+}

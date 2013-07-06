@@ -1,11 +1,11 @@
 #include <iostream>
-#include <cctype>
 #include <string>
-#include "Special_Date.h"
+#include <boost/regex.hpp>  // Boost.Regex lib
 
-int main()
-{
-  Special_Date::Date d(100);
-  std::cout << d;
-  return 0;
+int main( ) {
+
+   std::string s, sre;
+   boost::regex re;
+
 }
+

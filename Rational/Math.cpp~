@@ -1,0 +1,95 @@
+#include <iostream>
+#include <stdexcept>
+#include "Math.h"
+
+namespace Math
+{
+  Rational::Rational(int n,int d)
+    :numerator(n),denominator(d)
+  {
+    if(d == 0) // throw error for dividing by 0
+      {
+        throw std::runtime_error("Denomiator cannot be zero");
+      }
+    
+    // simplify the fraction
+    // get greatest common diviors then divde by both parts by it
+    int div = gcd(numerator,denominator);
+    numerator/= div;
+    std::cout << "numerator after simply in constructor: " << numerator << '\n';
+    denominator/= div;
+    std::cout << "denominator after simply in constructor: " << denominator << '\n';
+    
+  }
+
+  Rational::Rational()
+    :numerator(1),denominator(1)
+  {
+  }
+
+  void simplify(Rational& r)
+  {
+    int div = gcd(r.numerator,r.denominator);
+    r.numerator/= div;
+    r.denominator/= div;
+  }
+  
+  void normalize(Rational& l, Rational& r)
+  {
+    int new_denominator = l.denominator * r.denominator;
+ 
+    l.numerator*= r.denominator;
+    r.numerator*= l.denominator;
+
+    l.denominator = r.denominator = new_denominator;
+  }
+
+  int gcd(int a,int b)
+  {
+    if (b == 0)
+      {
+        return a;
+      }
+    return gcd(b, a%b);
+  }
+  Rational operator+(Rational l, Rational r)
+  {
+    Rational t;
+    normalize(l,r); // get them with the same denominator
+    // std::cout << "left numerator after normalize in + : " << l.numerator << '\n';
+    // std::cout << "left denominator after normalize in + : " << l.denominator << '\n';
+
+    // std::cout << "right numerator after normalize in + : " << r.numerator << '\n';
+    // std::cout << "right denominator after normalize in + : " << r.denominator << '\n';
+    t.numerator = l.numerator + r.numerator;
+    t.denominator = l.denominator;
+    // std::cout << "temp numerator after addition in + : " << t.numerator << '\n';
+    // std::cout << "temp denominator after addition in + : " << t.denominator << '\n';
+    simplify(t); 
+
+    // std::cout << "temp numerator after simplify in + : " << t.numerator << '\n';
+    // std::cout << "temp denominator after simplify in + : " << t.denominator << '\n';
+    return t;
+  }
+
+  Rational operator-(Rational l,Rational r)
+  {
+    Rational t;
+    normalize(l,r); // get them with the same denominator
+    // std::cout << "left numerator after normalize in + : " << l.numerator << '\n';
+    // std::cout << "left denominator after normalize in + : " << l.denominator << '\n';
+
+    // std::cout << "right numerator after normalize in + : " << r.numerator << '\n';
+    // std::cout << "right denominator after normalize in + : " << r.denominator << '\n';
+    t.numerator = l.numerator - r.numerator;
+    t.denominator = l.denominator;
+    // std::cout << "temp numerator after addition in + : " << t.numerator << '\n';
+    // std::cout << "temp denominator after addition in + : " << t.denominator << '\n';
+    simplify(t); 
+
+    // std::cout << "temp numerator after simplify in + : " << t.numerator << '\n';
+    // std::cout << "temp denominator after simplify in + : " << t.denominator << '\n';
+    return t;
+
+  }
+}

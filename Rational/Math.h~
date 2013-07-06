@@ -1,0 +1,22 @@
+
+namespace Math
+{
+  class Rational
+    {
+    public:
+      Rational(int n, int d);
+      Rational();
+      int numerator;
+      int denominator;
+    private:
+    };
+  void simplify(Rational& r);
+  void normalize(Rational& l,Rational& r);
+  int gcd(int a,int b);
+
+  //operator overloading
+  Rational operator+(Rational l,Rational r);
+  Rational operator-(Rational l,Rational r);
+  std::ostream& operator<<(std::ostream& os,const Rational& r);
+
+}
