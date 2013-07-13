@@ -1,0 +1,10 @@
+#include "money.h"
+
+
+int main()
+{
+  Money m(1,23);
+  Money m(123);
+  std::cout << m << '\n';
+
+}

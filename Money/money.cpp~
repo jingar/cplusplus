@@ -1,0 +1,32 @@
+#include "money.h"
+
+
+Money::Money(unsigned long int d, unsigned long int c)
+  :cents(c)
+{
+  cents+= (d*100); // convert dollars into cents
+}
+
+Money::Money(unsigned long int c)
+  :cents(c)
+{
+}
+
+unsigned long int Money::get_dollars() const
+{
+  return cents/100;
+
+}
+unsigned long int Money::get_cents() const 
+{
+  return cents % 100;
+}
+
+
+std::ostream& operator<<(std::ostream& os,const Money& r)
+{
+  std::cout << r.get_dollars() << "." << r.get_cents();
+  return os;
+}
+
+

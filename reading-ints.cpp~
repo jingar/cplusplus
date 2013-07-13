@@ -1,0 +1,22 @@
+#include <iostream>
+#include <cctype>
+void skip_to_int()
+{
+  if(std::cin.fail())
+    {
+      std::cin.clear();
+      char ch;
+      while(std::cin >> ch)
+        {
+
+
+        }
+    }
+}
+
+
+int main()
+{
+
+
+}
