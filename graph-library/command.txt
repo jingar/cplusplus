@@ -1,0 +1,10 @@
+
+--full command when they all header files and .cpp files are in the same place
+ g++ -Wno-deprecated -I/usr/local/include -I/usr/local/include/FL/images -D_LARGEFILE_SOURCE -D_LARGEFILE64_SOURCE -D_THREAD_SAFE -D_REENTRANT -o test test.cpp Graph.cpp GUI.cpp Simple_window.cpp Window.cpp -L/usr/local/lib/ -lfltk -lXext -lpthread -ldl -lm -lX11
+
+
+-- shorter version
+g++ -I. -o test test.cpp libbookgui.a -L/usr/local/lib/ -lfltk_images -lfltk_png -lfltk_jpeg -lfltk -lXext -lpthread -ldl -lm -lX11
+
+--when the header file, .cpp files and libbookgui.a are in the sub-directory called library
+g++ -I library/ -o test test.cpp library/libbookgui.a -L/usr/local/lib/ -lfltk_images -lfltk_png -lfltk_jpeg -lfltk -lXext -lpthread -ldl -lm -lX11

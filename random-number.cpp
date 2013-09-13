@@ -3,7 +3,6 @@
 #include <ctime>
 #include <cstdlib>
 
-
 class Random_number_generator
 {
 private:

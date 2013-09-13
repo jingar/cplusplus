@@ -5,7 +5,7 @@
 #include <cstdio>
 #include <cctype>
 #include <sstream>
-int main()
+int main() 
 {
   std::cin.unsetf(std::ios::dec);	// see page 380
   std::cin.unsetf(std::ios::oct);
@@ -26,7 +26,7 @@ int main()
         std::cout << std::oct << '\n';
       }
       else {	// it was plain 0
-                // 0 is an octal number (really!)
+        // 0 is an octal number (really!)
         std::cin.unget();	// put character back
         std::cout << std::oct << '\n';
       }
@@ -35,9 +35,8 @@ int main()
       std::cin.unget();	// put character back
       std::cin>>std::dec>>x;
       std::cout << std::dec << '\n';
-          
     }
-  }
-  return 0;
+  }	
+ return 0;
 }
 

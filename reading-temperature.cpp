@@ -263,7 +263,6 @@ int main()
   std::cin >> file_name;
   std::ifstream ifs(file_name.c_str());
   ifs.exceptions(ifs.exceptions()|std::ios_base::badbit);
-
   init_input_table(month_input_table);
   std::vector<Year> years;
   while(true)

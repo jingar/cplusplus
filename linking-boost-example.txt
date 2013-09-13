@@ -1,0 +1,1 @@
+ g++ -I /home/saad/Downloads/Boost/boost_1_53_0/ -lrt test-regex.cpp -o test-regex /home/saad/Downloads/Boost/boost_1_53_0/stage/lib/libboost_regex.a 
